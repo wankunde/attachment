@@ -38,25 +38,27 @@ sqlplus meta_store/paic1234@JZTEST @load.sql
 # Start Hive MetaStore and Hive Server
 
 > sudo service hive-metastore start
+
 > sudo service hive-server2 start
 
 # Database data check
 mysql 数据查询
-> 
-mysql -u hive -phive -h datanode3 --database=metastore -e "select 'CDS',COUNT(1) from CDS t UNION ALL 
-select 'SDS',COUNT(1) from SDS t UNION ALL 
-select 'TBLS',COUNT(1) from TBLS t UNION ALL 
-select 'PARTITIONS',COUNT(1) from PARTITIONS t UNION ALL 
-select 'FUNCS',COUNT(1) from FUNCS t"
+
+
+> mysql -u hive -phive -h datanode3 --database=metastore -e "select 'CDS',COUNT(1) from CDS t UNION ALL 
+> select 'SDS',COUNT(1) from SDS t UNION ALL 
+> select 'TBLS',COUNT(1) from TBLS t UNION ALL 
+> select 'PARTITIONS',COUNT(1) from PARTITIONS t UNION ALL 
+> select 'FUNCS',COUNT(1) from FUNCS t"
  
 oracle数据查询
 进入sqlplus，查询
-> 
-select 'CDS',COUNT(1) from CDS t UNION ALL 
-select 'SDS',COUNT(1) from SDS t UNION ALL 
-select 'TBLS',COUNT(1) from TBLS t UNION ALL 
-select 'PARTITIONS',COUNT(1) from PARTITIONS t UNION ALL 
-select 'FUNCS',COUNT(1) from FUNCS t
+
+> select 'CDS',COUNT(1) from CDS t UNION ALL 
+> select 'SDS',COUNT(1) from SDS t UNION ALL 
+> select 'TBLS',COUNT(1) from TBLS t UNION ALL 
+> select 'PARTITIONS',COUNT(1) from PARTITIONS t UNION ALL 
+> select 'FUNCS',COUNT(1) from FUNCS t
 
 # Schama备注
 
@@ -70,6 +72,6 @@ https://github.com/apache/hive/blob/master/metastore/scripts/upgrade/mysql/021-H
 * 数据导入Oracle的过程还是很慢，使用了Append，Nologging，PL/SQL等技术优化，看dba支持吧。
  
 
-----
-
-[HIVE-7018]:(https://issues.apache.org/jira/browse/HIVE-7018 "HIVE-7018")
+-------
+[git]:https://github.com/wankunde/attachment/tree/master/20160429/mysql2oracle
+[HIVE-7018]:https://issues.apache.org/jira/browse/HIVE-7018 "HIVE-7018"
