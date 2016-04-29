@@ -2,6 +2,7 @@
 # Stop Hive MetaStore and Hive Server
  
 > sudo service hive-metastore stop
+
 > sudo service hive-server2 stop
 
 # Dump myql数据
@@ -59,7 +60,7 @@ select 'FUNCS',COUNT(1) from FUNCS t
 
 # Schama备注
 
-* [HIVE-7018][2] 在HIVE-7018中，mysql的schema中，TBLS表和PARTITIONS表的字段会有*LINK_TARGET_ID NUMBERLINK_TARGET_ID NUMBER*字段，hive没有使用这两个字段，这个在oracle等其他数据库的元数据库中没有，而且，后期mysql的元数据升级的时候会直接删除这两个字段。
+* [HIVE-7018][HIVE-7018] 在HIVE-7018中，mysql的schema中，TBLS表和PARTITIONS表的字段会有*LINK_TARGET_ID NUMBERLINK_TARGET_ID NUMBER*字段，hive没有使用这两个字段，这个在oracle等其他数据库的元数据库中没有，而且，后期mysql的元数据升级的时候会直接删除这两个字段。
 https://github.com/apache/hive/blob/master/metastore/scripts/upgrade/mysql/021-HIVE-7018.mysql.sql
  
 * SDS表中字段 IS_STOREDASSUBDIRECTORIES NUMBER(1) NOT NULL CHECK (IS_STOREDASSUBDIRECTORIES IN (1,0))在表中顺序在mysql schema和oracle schema不同，在迁移数据的时候需要特殊处理。
@@ -69,6 +70,6 @@ https://github.com/apache/hive/blob/master/metastore/scripts/upgrade/mysql/021-H
 * 数据导入Oracle的过程还是很慢，使用了Append，Nologging，PL/SQL等技术优化，看dba支持吧。
  
 
+----
 
-
-[2]:(https://issues.apache.org/jira/browse/HIVE-7018 "HIVE-7018")
+[HIVE-7018]:(https://issues.apache.org/jira/browse/HIVE-7018 "HIVE-7018")
