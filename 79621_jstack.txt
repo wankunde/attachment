@@ -1,0 +1,299 @@
+[dsp@cnsz033401 bin]$ ./jstack -l 79621
+2018-06-12 12:14:02
+Full thread dump Java HotSpot(TM) 64-Bit Server VM (25.144-b01 mixed mode):
+
+"SIGTERM handler" #41 daemon prio=9 os_prio=0 tid=0x00007ff4342b1800 nid=0x1af57 waiting for monitor entry [0x00007ff42913b000]
+   java.lang.Thread.State: BLOCKED (on object monitor)
+	at java.lang.Shutdown.exit(Shutdown.java:212)
+	- waiting to lock <0x00000000f04fcc10> (a java.lang.Class for java.lang.Shutdown)
+	at java.lang.Terminator$1.handle(Terminator.java:52)
+	at sun.misc.Signal$1.run(Signal.java:212)
+	at java.lang.Thread.run(Thread.java:748)
+
+   Locked ownable synchronizers:
+	- None
+
+"Attach Listener" #40 daemon prio=9 os_prio=0 tid=0x00007ff4342b6000 nid=0xaf8b waiting on condition [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+   Locked ownable synchronizers:
+	- None
+
+"Thread-0" #21 prio=5 os_prio=0 tid=0x00007ff456b5d800 nid=0x16c4e waiting for monitor entry [0x00007ff4239fc000]
+   java.lang.Thread.State: BLOCKED (on object monitor)
+	at org.apache.hadoop.hdfs.DFSOutputStream.close(DFSOutputStream.java:2419)
+	- waiting to lock <0x00000000fb50e8d0> (a org.apache.hadoop.hdfs.DFSOutputStream)
+	at org.apache.hadoop.hdfs.DFSClient.closeAllFilesBeingWritten(DFSClient.java:966)
+	at org.apache.hadoop.hdfs.DFSClient.closeOutputStreams(DFSClient.java:998)
+	at org.apache.hadoop.hdfs.DistributedFileSystem.close(DistributedFileSystem.java:985)
+	at org.apache.hadoop.fs.FileSystem$Cache.closeAll(FileSystem.java:2740)
+	- locked <0x00000000f01ef080> (a org.apache.hadoop.fs.FileSystem$Cache)
+	at org.apache.hadoop.fs.FileSystem$Cache$ClientFinalizer.run(FileSystem.java:2757)
+	- locked <0x00000000f01f86f0> (a org.apache.hadoop.fs.FileSystem$Cache$ClientFinalizer)
+	at org.apache.hadoop.util.ShutdownHookManager$1.run(ShutdownHookManager.java:54)
+
+   Locked ownable synchronizers:
+	- None
+
+"LeaseRenewer:dsp@pasc" #33 daemon prio=5 os_prio=0 tid=0x000000000454a800 nid=0x16a00 waiting on condition [0x00007ff423dfe000]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at org.apache.hadoop.hdfs.LeaseRenewer.run(LeaseRenewer.java:444)
+	at org.apache.hadoop.hdfs.LeaseRenewer.access$700(LeaseRenewer.java:71)
+	at org.apache.hadoop.hdfs.LeaseRenewer$1.run(LeaseRenewer.java:304)
+	at java.lang.Thread.run(Thread.java:748)
+
+   Locked ownable synchronizers:
+	- None
+
+"Tez session start thread" #29 prio=5 os_prio=0 tid=0x00007ff45684d800 nid=0x162c2 in Object.wait() [0x00007ff428e39000]
+   java.lang.Thread.State: WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x00000000fe8cdca0> (a org.apache.hadoop.ipc.Client$Call)
+	at java.lang.Object.wait(Object.java:502)
+	at org.apache.hadoop.ipc.Client.call(Client.java:1458)
+	- locked <0x00000000fe8cdca0> (a org.apache.hadoop.ipc.Client$Call)
+	at org.apache.hadoop.ipc.Client.call(Client.java:1403)
+	at org.apache.hadoop.ipc.ProtobufRpcEngine$Invoker.invoke(ProtobufRpcEngine.java:230)
+	at com.sun.proxy.$Proxy14.complete(Unknown Source)
+	at org.apache.hadoop.hdfs.protocolPB.ClientNamenodeProtocolTranslatorPB.complete(ClientNamenodeProtocolTranslatorPB.java:443)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.hadoop.io.retry.RetryInvocationHandler.invokeMethod(RetryInvocationHandler.java:252)
+	at org.apache.hadoop.io.retry.RetryInvocationHandler.invoke(RetryInvocationHandler.java:104)
+	at com.sun.proxy.$Proxy15.complete(Unknown Source)
+	at org.apache.hadoop.hdfs.DFSOutputStream.completeFile(DFSOutputStream.java:2476)
+	at org.apache.hadoop.hdfs.DFSOutputStream.closeImpl(DFSOutputStream.java:2457)
+	- locked <0x00000000fb50e8d0> (a org.apache.hadoop.hdfs.DFSOutputStream)
+	at org.apache.hadoop.hdfs.DFSOutputStream.close(DFSOutputStream.java:2422)
+	- locked <0x00000000fb50e8d0> (a org.apache.hadoop.hdfs.DFSOutputStream)
+	at org.apache.hadoop.fs.FSDataOutputStream$PositionCache.close(FSDataOutputStream.java:72)
+	at org.apache.hadoop.fs.FSDataOutputStream.close(FSDataOutputStream.java:106)
+	at org.apache.tez.client.TezClientUtils.createApplicationSubmissionContext(TezClientUtils.java:567)
+	at org.apache.tez.client.TezClient.start(TezClient.java:395)
+	- locked <0x00000000f070e048> (a org.apache.tez.client.TezClient)
+	at org.apache.hadoop.hive.ql.exec.tez.TezSessionState.startSessionAndContainers(TezSessionState.java:264)
+	at org.apache.hadoop.hive.ql.exec.tez.TezSessionState.access$000(TezSessionState.java:70)
+	at org.apache.hadoop.hive.ql.exec.tez.TezSessionState$1.call(TezSessionState.java:247)
+	at org.apache.hadoop.hive.ql.exec.tez.TezSessionState$1.call(TezSessionState.java:243)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:748)
+
+   Locked ownable synchronizers:
+	- None
+
+"Thread-3" #25 daemon prio=5 os_prio=0 tid=0x00007ff4556d3000 nid=0x15e36 runnable [0x00007ff42cbc2000]
+   java.lang.Thread.State: RUNNABLE
+	at org.apache.hadoop.net.unix.DomainSocketWatcher.doPoll0(Native Method)
+	at org.apache.hadoop.net.unix.DomainSocketWatcher.access$900(DomainSocketWatcher.java:52)
+	at org.apache.hadoop.net.unix.DomainSocketWatcher$2.run(DomainSocketWatcher.java:509)
+	at java.lang.Thread.run(Thread.java:748)
+
+   Locked ownable synchronizers:
+	- None
+
+"Service Thread" #20 daemon prio=9 os_prio=0 tid=0x00007ff454167800 nid=0x143bd runnable [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+   Locked ownable synchronizers:
+	- None
+
+"C1 CompilerThread14" #19 daemon prio=9 os_prio=0 tid=0x00007ff454164000 nid=0x143b8 waiting on condition [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+   Locked ownable synchronizers:
+	- None
+
+"C1 CompilerThread13" #18 daemon prio=9 os_prio=0 tid=0x00007ff454162000 nid=0x143b1 waiting on condition [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+   Locked ownable synchronizers:
+	- None
+
+"C1 CompilerThread12" #17 daemon prio=9 os_prio=0 tid=0x00007ff454160000 nid=0x143ae waiting on condition [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+   Locked ownable synchronizers:
+	- None
+
+"C1 CompilerThread11" #16 daemon prio=9 os_prio=0 tid=0x00007ff45415e000 nid=0x143a5 waiting on condition [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+   Locked ownable synchronizers:
+	- None
+
+"C1 CompilerThread10" #15 daemon prio=9 os_prio=0 tid=0x00007ff45415c800 nid=0x143a1 waiting on condition [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+   Locked ownable synchronizers:
+	- None
+
+"C2 CompilerThread9" #14 daemon prio=9 os_prio=0 tid=0x00007ff45415a800 nid=0x1439b waiting on condition [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+   Locked ownable synchronizers:
+	- None
+
+"C2 CompilerThread8" #13 daemon prio=9 os_prio=0 tid=0x00007ff454158800 nid=0x14394 waiting on condition [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+   Locked ownable synchronizers:
+	- None
+
+"C2 CompilerThread7" #12 daemon prio=9 os_prio=0 tid=0x00007ff454156800 nid=0x1438f waiting on condition [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+   Locked ownable synchronizers:
+	- None
+
+"C2 CompilerThread6" #11 daemon prio=9 os_prio=0 tid=0x00007ff454154800 nid=0x1438a waiting on condition [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+   Locked ownable synchronizers:
+	- None
+
+"C2 CompilerThread5" #10 daemon prio=9 os_prio=0 tid=0x00007ff454152800 nid=0x14385 waiting on condition [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+   Locked ownable synchronizers:
+	- None
+
+"C2 CompilerThread4" #9 daemon prio=9 os_prio=0 tid=0x00007ff454150800 nid=0x1437b waiting on condition [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+   Locked ownable synchronizers:
+	- None
+
+"C2 CompilerThread3" #8 daemon prio=9 os_prio=0 tid=0x00007ff454136000 nid=0x14374 waiting on condition [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+   Locked ownable synchronizers:
+	- None
+
+"C2 CompilerThread2" #7 daemon prio=9 os_prio=0 tid=0x00007ff4540ef800 nid=0x1436f waiting on condition [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+   Locked ownable synchronizers:
+	- None
+
+"C2 CompilerThread1" #6 daemon prio=9 os_prio=0 tid=0x00007ff4540ee000 nid=0x1436b waiting on condition [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+   Locked ownable synchronizers:
+	- None
+
+"C2 CompilerThread0" #5 daemon prio=9 os_prio=0 tid=0x00007ff4540eb000 nid=0x1435e waiting on condition [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+   Locked ownable synchronizers:
+	- None
+
+"Signal Dispatcher" #4 daemon prio=9 os_prio=0 tid=0x00007ff4540e9800 nid=0x14353 runnable [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+   Locked ownable synchronizers:
+	- None
+
+"Finalizer" #3 daemon prio=8 os_prio=0 tid=0x00007ff4540b6800 nid=0x1424a in Object.wait() [0x00007ff4391a1000]
+   java.lang.Thread.State: WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x00000000f01e7080> (a java.lang.ref.ReferenceQueue$Lock)
+	at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+	- locked <0x00000000f01e7080> (a java.lang.ref.ReferenceQueue$Lock)
+	at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:164)
+	at java.lang.ref.Finalizer$FinalizerThread.run(Finalizer.java:209)
+
+   Locked ownable synchronizers:
+	- None
+
+"Reference Handler" #2 daemon prio=10 os_prio=0 tid=0x00007ff4540b2000 nid=0x14240 in Object.wait() [0x00007ff4392a2000]
+   java.lang.Thread.State: WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x00000000f01e7118> (a java.lang.ref.Reference$Lock)
+	at java.lang.Object.wait(Object.java:502)
+	at java.lang.ref.Reference.tryHandlePending(Reference.java:191)
+	- locked <0x00000000f01e7118> (a java.lang.ref.Reference$Lock)
+	at java.lang.ref.Reference$ReferenceHandler.run(Reference.java:153)
+
+   Locked ownable synchronizers:
+	- None
+
+"main" #1 prio=5 os_prio=0 tid=0x00007ff454015800 nid=0x1412a in Object.wait() [0x00007ff458888000]
+   java.lang.Thread.State: WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x00000000f05b32f8> (a org.apache.hadoop.util.ShutdownHookManager$1)
+	at java.lang.Thread.join(Thread.java:1252)
+	- locked <0x00000000f05b32f8> (a org.apache.hadoop.util.ShutdownHookManager$1)
+	at java.lang.Thread.join(Thread.java:1326)
+	at java.lang.ApplicationShutdownHooks.runHooks(ApplicationShutdownHooks.java:106)
+	at java.lang.ApplicationShutdownHooks$1.run(ApplicationShutdownHooks.java:46)
+	at java.lang.Shutdown.runHooks(Shutdown.java:123)
+	at java.lang.Shutdown.sequence(Shutdown.java:167)
+	at java.lang.Shutdown.exit(Shutdown.java:212)
+	- locked <0x00000000f04fcc10> (a java.lang.Class for java.lang.Shutdown)
+	at java.lang.Runtime.exit(Runtime.java:109)
+	at java.lang.System.exit(System.java:971)
+	at org.apache.hadoop.hive.cli.CliDriver.main(CliDriver.java:617)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.hadoop.util.RunJar.run(RunJar.java:221)
+	at org.apache.hadoop.util.RunJar.main(RunJar.java:136)
+
+   Locked ownable synchronizers:
+	- None
+
+"VM Thread" os_prio=0 tid=0x00007ff4540aa000 nid=0x14234 runnable 
+
+"GC task thread#0 (ParallelGC)" os_prio=0 tid=0x00007ff45402b000 nid=0x14168 runnable 
+
+"GC task thread#1 (ParallelGC)" os_prio=0 tid=0x00007ff45402c800 nid=0x14171 runnable 
+
+"GC task thread#2 (ParallelGC)" os_prio=0 tid=0x00007ff45402e800 nid=0x1417a runnable 
+
+"GC task thread#3 (ParallelGC)" os_prio=0 tid=0x00007ff454030000 nid=0x14184 runnable 
+
+"GC task thread#4 (ParallelGC)" os_prio=0 tid=0x00007ff454032000 nid=0x14191 runnable 
+
+"GC task thread#5 (ParallelGC)" os_prio=0 tid=0x00007ff454033800 nid=0x1419b runnable 
+
+"GC task thread#6 (ParallelGC)" os_prio=0 tid=0x00007ff454035800 nid=0x141a7 runnable 
+
+"GC task thread#7 (ParallelGC)" os_prio=0 tid=0x00007ff454037000 nid=0x141ab runnable 
+
+"GC task thread#8 (ParallelGC)" os_prio=0 tid=0x00007ff454039000 nid=0x141b2 runnable 
+
+"GC task thread#9 (ParallelGC)" os_prio=0 tid=0x00007ff45403a800 nid=0x141bd runnable 
+
+"GC task thread#10 (ParallelGC)" os_prio=0 tid=0x00007ff45403c800 nid=0x141c3 runnable 
+
+"GC task thread#11 (ParallelGC)" os_prio=0 tid=0x00007ff45403e000 nid=0x141cb runnable 
+
+"GC task thread#12 (ParallelGC)" os_prio=0 tid=0x00007ff454040000 nid=0x141d7 runnable 
+
+"GC task thread#13 (ParallelGC)" os_prio=0 tid=0x00007ff454041800 nid=0x141e1 runnable 
+
+"GC task thread#14 (ParallelGC)" os_prio=0 tid=0x00007ff454043800 nid=0x141e7 runnable 
+
+"GC task thread#15 (ParallelGC)" os_prio=0 tid=0x00007ff454045000 nid=0x141ec runnable 
+
+"GC task thread#16 (ParallelGC)" os_prio=0 tid=0x00007ff454047000 nid=0x141f6 runnable 
+
+"GC task thread#17 (ParallelGC)" os_prio=0 tid=0x00007ff454048800 nid=0x141fd runnable 
+
+"GC task thread#18 (ParallelGC)" os_prio=0 tid=0x00007ff45404a800 nid=0x14201 runnable 
+
+"GC task thread#19 (ParallelGC)" os_prio=0 tid=0x00007ff45404c000 nid=0x1420b runnable 
+
+"GC task thread#20 (ParallelGC)" os_prio=0 tid=0x00007ff45404e000 nid=0x14211 runnable 
+
+"GC task thread#21 (ParallelGC)" os_prio=0 tid=0x00007ff45404f800 nid=0x14215 runnable 
+
+"GC task thread#22 (ParallelGC)" os_prio=0 tid=0x00007ff454051800 nid=0x1421c runnable 
+
+"VM Periodic Task Thread" os_prio=0 tid=0x00007ff45416b000 nid=0x143c3 waiting on condition 
+
+JNI global references: 347
